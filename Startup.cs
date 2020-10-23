@@ -33,7 +33,8 @@ namespace WebApiCore3
             services.AddControllers();
 
             //Dependency Injection
-            services.AddScoped<IWebApiRepo, MockWebApiRepo>();
+            // services.AddScoped<IWebApiRepo, MockWebApiRepo>();
+            services.AddScoped<IWebApiRepo, SqlWebApiCoreRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
