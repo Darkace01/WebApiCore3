@@ -5,7 +5,7 @@ namespace WebApiCore3.Data
 {
     public interface IWebApiRepo
     {
-        IEnumerable<Command> GetAppCommands();
+        IEnumerable<Command> GetAllCommands();
         Command GetCommandById(int Id);
     }
 }

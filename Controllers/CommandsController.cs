@@ -21,7 +21,7 @@ namespace WebApiCore3.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Command>> GetAllCommands()
         {
-            var commandItems = _repository.GetAppCommands();
+            var commandItems = _repository.GetAllCommands();
 
             return Ok(commandItems);
         }
