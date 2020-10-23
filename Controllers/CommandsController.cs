@@ -10,7 +10,13 @@ namespace WebApiCore3.Controllers
     [ApiController]
     public class CommandsController : ControllerBase
     {
-        private readonly MockWebApiRepo _repository = new MockWebApiRepo();
+        private readonly IWebApiRepo _repository;
+
+        public CommandsController(IWebApiRepo repository)
+        {
+            _repository = repository;
+        }
+        //private readonly MockWebApiRepo _repository = new MockWebApiRepo();
         //GET api/commands
         [HttpGet]
         public ActionResult<IEnumerable<Command>> GetAllCommands()
