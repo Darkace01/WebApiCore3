@@ -8,7 +8,9 @@ namespace WebApiCore3.Profiles
     {
         public CommandsProfile()
         {
+            //Source => Target
             CreateMap<Command, CommandReadDTO>();
+            CreateMap<CommandCreateDTO, Command>();
         }
     }
 }

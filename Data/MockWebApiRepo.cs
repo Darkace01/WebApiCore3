@@ -5,6 +5,11 @@ namespace WebApiCore3.Data
 {
     public class MockWebApiRepo : IWebApiRepo
     {
+        public void CreateCommand(Command command)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command>{
@@ -19,6 +24,11 @@ namespace WebApiCore3.Data
         public Command GetCommandById(int Id)
         {
             return new Command { Id = 0, HowTo = "Boil an egg", Line = "Boil Water", Platform = "Kattle & Pan" };
+        }
+
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
