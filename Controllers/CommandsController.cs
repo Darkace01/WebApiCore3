@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WebApiCore3.Data;
 using WebApiCore3.DTOs;
@@ -64,6 +65,26 @@ namespace WebApiCore3.Controllers
 
             _mapper.Map(commandUpdateDTO, commandModalFromRepo);
 
+            _repository.UpdateCommand(commandModalFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/commands/{Id}
+        [HttpPatch("{Id}")]
+        public ActionResult PartialCommandUpdate(int Id, JsonPatchDocument<CommandUpdateDTO> patchDoc)
+        {
+            var commandModalFromRepo = _repository.GetCommandById(Id);
+            if (commandModalFromRepo == null)
+                return NotFound();
+
+            var commandToPatch = _mapper.Map<CommandUpdateDTO>(commandModalFromRepo);
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+            if (!TryValidateModel(commandToPatch))
+                return ValidationProblem(ModelState);
+
+            _mapper.Map(commandToPatch, commandModalFromRepo);
             _repository.UpdateCommand(commandModalFromRepo);
             _repository.SaveChanges();
 
