@@ -53,5 +53,21 @@ namespace WebApiCore3.Controllers
 
             return CreatedAtRoute(nameof(GetCommandById), new { Id = commandReadDTO.Id }, commandReadDTO);
         }
+
+        //PUT api/commands/{Id}
+        [HttpPut("{Id}")]
+        public ActionResult UpdateCommand(int Id, CommandUpdateDTO commandUpdateDTO)
+        {
+            var commandModalFromRepo = _repository.GetCommandById(Id);
+            if (commandModalFromRepo == null)
+                return NotFound();
+
+            _mapper.Map(commandUpdateDTO, commandModalFromRepo);
+
+            _repository.UpdateCommand(commandModalFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace WebApiCore3.DTOs
 {
     public class CommandReadDTO

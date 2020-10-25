@@ -9,5 +9,6 @@ namespace WebApiCore3.Data
         IEnumerable<Command> GetAllCommands();
         Command GetCommandById(int Id);
         void CreateCommand(Command command);
+        void UpdateCommand(Command command);
     }
 }

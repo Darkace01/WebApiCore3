@@ -30,5 +30,10 @@ namespace WebApiCore3.Data
         {
             throw new System.NotImplementedException();
         }
+
+        public void UpdateCommand(Command command)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

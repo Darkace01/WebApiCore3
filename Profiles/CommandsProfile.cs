@@ -11,6 +11,7 @@ namespace WebApiCore3.Profiles
             //Source => Target
             CreateMap<Command, CommandReadDTO>();
             CreateMap<CommandCreateDTO, Command>();
+            CreateMap<CommandUpdateDTO, Command>();
         }
     }
 }

@@ -36,5 +36,10 @@ namespace WebApiCore3.Data
         {
             return (_ctx.SaveChanges() >= 0);
         }
+
+        public void UpdateCommand(Command command)
+        {
+            //Do Nothing for update
+        }
     }
 }
