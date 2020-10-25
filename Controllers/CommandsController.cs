@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WebApiCore3.Data;
+using WebApiCore3.DTOs;
 using WebApiCore3.Models;
 
 namespace WebApiCore3.Controllers
@@ -11,28 +13,32 @@ namespace WebApiCore3.Controllers
     public class CommandsController : ControllerBase
     {
         private readonly IWebApiRepo _repository;
+        private readonly IMapper _mapper;
 
-        public CommandsController(IWebApiRepo repository)
+        public CommandsController(IWebApiRepo repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
-        //private readonly MockWebApiRepo _repository = new MockWebApiRepo();
+
         //GET api/commands
         [HttpGet]
-        public ActionResult<IEnumerable<Command>> GetAllCommands()
+        public ActionResult<IEnumerable<CommandReadDTO>> GetAllCommands()
         {
             var commandItems = _repository.GetAllCommands();
 
-            return Ok(commandItems);
+            return Ok(_mapper.Map<IEnumerable<CommandReadDTO>>(commandItems));
         }
 
         //GET api/commands/{id}
         [HttpGet("{id}")]
-        public ActionResult<Command> GetCommandById(int Id)
+        public ActionResult<CommandReadDTO> GetCommandById(int Id)
         {
             var commandItem = _repository.GetCommandById(Id);
 
-            return Ok(commandItem);
+            if (commandItem != null)
+                return Ok(_mapper.Map<CommandReadDTO>(commandItem));
+            return NotFound();
         }
     }
 }
