@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebApiCore3.Data;
 using Newtonsoft.Json.Serialization;
+using Microsoft.OpenApi.Models;
 
 namespace WebApiCore3
 {
@@ -40,6 +41,11 @@ namespace WebApiCore3
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //Dependency Injection
             services.AddScoped<IWebApiRepo, SqlWebApiCoreRepo>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Movies Demo", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +65,13 @@ namespace WebApiCore3
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Movies Demo V1");
             });
         }
     }
