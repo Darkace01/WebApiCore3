@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebApiCore3.Data;
+using Newtonsoft.Json.Serialization;
 
 namespace WebApiCore3
 {
@@ -31,7 +32,10 @@ namespace WebApiCore3
             services.AddDbContext<WebApiCoreContext>(opt => opt.UseSqlServer(
               Configuration.GetConnectionString("WebApiConnnection")
           ));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s =>
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //Dependency Injection
