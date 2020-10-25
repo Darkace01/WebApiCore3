@@ -20,6 +20,7 @@ namespace WebApiCore3.Data
                 throw new ArgumentNullException(nameof(command));
 
             _ctx.Commands.Add(command);
+            SaveChanges();
         }
 
         public void DeleteCommand(Command command)
@@ -28,6 +29,7 @@ namespace WebApiCore3.Data
                 throw new ArgumentNullException(nameof(command));
 
             _ctx.Commands.Remove(command);
+            SaveChanges();
         }
 
         public IEnumerable<Command> GetAllCommands()
@@ -47,7 +49,7 @@ namespace WebApiCore3.Data
 
         public void UpdateCommand(Command command)
         {
-            //Do Nothing for update
+            SaveChanges();
         }
     }
 }

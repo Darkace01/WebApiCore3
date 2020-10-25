@@ -48,7 +48,6 @@ namespace WebApiCore3.Controllers
         {
             var commandModal = _mapper.Map<Command>(commandCreateDTO);
             _repository.CreateCommand(commandModal);
-            _repository.SaveChanges();
 
             var commandReadDTO = _mapper.Map<CommandReadDTO>(commandModal);
 
@@ -66,7 +65,6 @@ namespace WebApiCore3.Controllers
             _mapper.Map(commandUpdateDTO, commandModalFromRepo);
 
             _repository.UpdateCommand(commandModalFromRepo);
-            _repository.SaveChanges();
 
             return NoContent();
         }
@@ -86,7 +84,6 @@ namespace WebApiCore3.Controllers
 
             _mapper.Map(commandToPatch, commandModalFromRepo);
             _repository.UpdateCommand(commandModalFromRepo);
-            _repository.SaveChanges();
 
             return NoContent();
         }
@@ -100,7 +97,6 @@ namespace WebApiCore3.Controllers
                 return NotFound();
 
             _repository.DeleteCommand(commandModalFromRepo);
-            _repository.SaveChanges();
 
             return NoContent();
         }
