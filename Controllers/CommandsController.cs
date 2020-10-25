@@ -90,5 +90,19 @@ namespace WebApiCore3.Controllers
 
             return NoContent();
         }
+
+        //DELETE api/commands/{Id}
+        [HttpDelete("{Id}")]
+        public ActionResult DeleteCommand(int Id)
+        {
+            var commandModalFromRepo = _repository.GetCommandById(Id);
+            if (commandModalFromRepo == null)
+                return NotFound();
+
+            _repository.DeleteCommand(commandModalFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

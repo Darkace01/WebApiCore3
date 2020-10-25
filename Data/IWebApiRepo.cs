@@ -10,5 +10,6 @@ namespace WebApiCore3.Data
         Command GetCommandById(int Id);
         void CreateCommand(Command command);
         void UpdateCommand(Command command);
+        void DeleteCommand(Command command);
     }
 }

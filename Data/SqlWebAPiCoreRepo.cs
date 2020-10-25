@@ -22,6 +22,14 @@ namespace WebApiCore3.Data
             _ctx.Commands.Add(command);
         }
 
+        public void DeleteCommand(Command command)
+        {
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
+
+            _ctx.Commands.Remove(command);
+        }
+
         public IEnumerable<Command> GetAllCommands()
         {
             return _ctx.Commands.ToList();
